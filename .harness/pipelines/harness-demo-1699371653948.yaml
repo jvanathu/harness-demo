@@ -19,36 +19,25 @@ pipeline:
             steps:
               - step:
                   type: GitClone
-                  name: harness-demo
-                  identifier: harnessdemo
+                  name: GitClone_1
+                  identifier: GitClone_1
                   spec:
                     connectorRef: githubjv
                     build:
                       type: branch
                       spec:
                         branch: main
-                  description: harness-demo
+                  description: harness
               - step:
                   type: Run
-                  name: Run
-                  identifier: Run
+                  name: Run_1
+                  identifier: Run_1
                   spec:
                     shell: Bash
                     command: |-
                       echo maven build
                       mvn -version
                       mvn clean install
-              - step:
-                  identifier: dockerbuild
-                  name: docker_build
-                  spec:
-                    image: plugins/docker
-                    settings:
-                      dry_run: "true"
-                      repo: hello/world
-                      tags: latest
-                  timeout: ""
-                  type: Plugin
           platform:
             os: Linux
             arch: Amd64
