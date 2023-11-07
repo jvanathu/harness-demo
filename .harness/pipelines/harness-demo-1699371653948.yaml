@@ -22,8 +22,7 @@ pipeline:
                   name: harness-demo
                   identifier: harnessdemo
                   spec:
-                    connectorRef: account.Github_OAuth_1699371641847
-                    repoName: harness-demo
+                    connectorRef: githubjv
                     build:
                       type: branch
                       spec:
