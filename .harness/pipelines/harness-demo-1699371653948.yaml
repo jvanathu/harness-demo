@@ -18,6 +18,28 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: GitClone
+                  name: harness-demo
+                  identifier: harnessdemo
+                  spec:
+                    connectorRef: account.Github_OAuth_1699371641847
+                    repoName: harness-demo
+                    build:
+                      type: branch
+                      spec:
+                        branch: main
+                  description: harness-demo
+              - step:
+                  type: Run
+                  name: Run
+                  identifier: Run
+                  spec:
+                    shell: Bash
+                    command: |-
+                      echo maven build
+                      mvn -version
+                      mvn clean install
+              - step:
                   identifier: dockerbuild
                   name: docker_build
                   spec:
@@ -29,9 +51,9 @@ pipeline:
                   timeout: ""
                   type: Plugin
           platform:
-            arch: Amd64
             os: Linux
+            arch: Amd64
           runtime:
-            spec: {}
             type: Cloud
+            spec: {}
         type: CI
